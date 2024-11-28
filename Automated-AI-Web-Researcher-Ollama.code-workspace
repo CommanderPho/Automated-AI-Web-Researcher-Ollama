@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"workbench.colorCustomizations": {
+			"editor.lineHighlightBackground": "#1073cf2d",
+			"editor.lineHighlightBorder": "#9fced11f",
+			"activityBar.background": "#013522",
+			"titleBar.activeBackground": "#024A30",
+			"titleBar.activeForeground": "#E8FFF6"
+		}
+	}
+}
