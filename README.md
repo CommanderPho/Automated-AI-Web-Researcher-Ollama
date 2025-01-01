@@ -52,11 +52,16 @@ The key distinction is that this isn't just a chatbot—it's an automated resear
     python -m venv venv
     source venv/bin/activate
     ```
+### Windows
+```cmd
+python -m venv venv
+.\venv\Scripts\activate
+```
 
 3. **Install dependencies:**
 
     ```sh
-    pip install -r requirements.txt
+    python -m pip install -r requirements.txt
     ```
 
 4. **Install and configure Ollama:**
