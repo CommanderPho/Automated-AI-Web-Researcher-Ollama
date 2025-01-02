@@ -6,11 +6,10 @@ LLM_TYPE = "ollama"  # Options: 'ollama', 'openai', 'anthropic'
 LLM_CONFIG_OLLAMA = {
     "llm_type": "ollama",
     "base_url": "http://localhost:9001",  # default Ollama server URL
-    "model_name": "custom-phi3-32k-Q4_K_M",  # Replace with your Ollama model name
+    "model_name": "research-phi3",  # Replace with your Ollama model name
     "temperature": 0.7,
     "top_p": 0.9,
     "n_ctx": 55000,
-    "context_length": 55000,
     "stop": ["User:", "\n\n"]
 }
 

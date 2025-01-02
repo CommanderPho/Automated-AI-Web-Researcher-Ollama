@@ -68,27 +68,9 @@ python -m venv venv
 
     Install Ollama following the instructions at [https://ollama.ai](https://ollama.ai).
 
-    Using your selected model file, create a custom model variant with the required context length (`phi3:3.8b-mini-128k-instruct` or `phi3:14b-medium-128k-instruct` are recommended).
+    Using your selected model, reccommended to pick one with the required context length for lots of searches (`phi3:3.8b-mini-128k-instruct` or `phi3:14b-medium-128k-instruct` are recommended).
 
-    Create a file named `modelfile` with the following exact contents:
-
-    ```
-    FROM your-model-name
-
-    PARAMETER num_ctx 38000
-    ```
-
-    Replace "your-model-name" with your chosen model (e.g., `phi3:3.8b-mini-128k-instruct`).
-
-    Then create the model:
-
-    ```sh
-    ollama create research-phi3 -f modelfile
-    ```
-
-    **Note:** This specific configuration is necessary as recent Ollama versions have reduced context windows on models like `phi3:3.8b-mini-128k-instruct` despite the name suggesting high context, which is why the `modelfile` step is necessary due to the large amount of information used during the research process.
-
-5. Go to the llm_config.py file which should hav an ollama section that looks like this:
+5. Go to the llm_config.py file which should have an ollama section that looks like this:
 
 ```sh
 LLM_CONFIG_OLLAMA = {
@@ -98,11 +80,10 @@ LLM_CONFIG_OLLAMA = {
     "temperature": 0.7,
     "top_p": 0.9,
     "n_ctx": 55000,
-    "context_length": 55000,
     "stop": ["User:", "\n\n"]
 ```
 
-Then change to the left of where it says replace with your Ollama model name, the "model_name" function, to the name of the model you have setup in Ollama to use with the program.
+Then change to the left of where it says replace with your Ollama model name, the "model_name" function, to the name of the model you have setup in Ollama to use with the program, you can now also change 'n_ctx' to set the desired context size.
    
 
 ## Usage
@@ -168,3 +149,47 @@ Please enjoy! And feel free to submit any suggestions for improvements so that w
 
 ## Disclaimer
 This project is for educational purposes only. Ensure you comply with the terms of service of all APIs and services used.
+
+
+
+# !--- Pho README ---!
+#### Setup
+Install with `.\OllamaSetup.exe /DIR=L:\MODELS\LLMs\OLLAMA_Models`
+```ps1
+ollama pull taozhiyuai/phi-3-medium-instruct:128k_q8_0 ## Did not work
+
+```
+
+## save `./modelfile` as:
+```modelfile
+FROM taozhiyuai/phi-3-medium-instruct:128k_q8_0
+
+PARAMETER num_ctx 38000
+```
+
+## 
+
+```ps1
+ollama create research-phi3 -f modelfile
+```
+
+```bash
+PS L:\repos\Automated-AI-Web-Researcher-Ollama> ollama list
+NAME                                          ID              SIZE     MODIFIED
+research-phi3:latest                          e70e1b981bc3    14 GB    40 seconds ago    
+taozhiyuai/phi-3-medium-instruct:128k_q8_0    8235c8c9af63    14 GB    40 seconds ago    
+PS L:\repos\Automated-AI-Web-Researcher-Ollama>
+```
+
+## Go to the `llm_config.py` file which should have an ollama section that looks like this:
+
+```sh
+LLM_CONFIG_OLLAMA = {
+    "llm_type": "ollama",
+    "base_url": "http://localhost:11434",  # default Ollama server URL
+    "model_name": "research-phi3",  # Replace with your Ollama model name. Default: "custom-phi3-32k-Q4_K_M"
+    "temperature": 0.7,
+    "top_p": 0.9,
+    "n_ctx": 55000,
+    "stop": ["User:", "\n\n"]
+```
