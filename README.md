@@ -149,3 +149,47 @@ Please enjoy! And feel free to submit any suggestions for improvements so that w
 
 ## Disclaimer
 This project is for educational purposes only. Ensure you comply with the terms of service of all APIs and services used.
+
+
+
+# !--- Pho README ---!
+#### Setup
+Install with `.\OllamaSetup.exe /DIR=L:\MODELS\LLMs\OLLAMA_Models`
+```ps1
+ollama pull taozhiyuai/phi-3-medium-instruct:128k_q8_0 ## Did not work
+
+```
+
+## save `./modelfile` as:
+```modelfile
+FROM taozhiyuai/phi-3-medium-instruct:128k_q8_0
+
+PARAMETER num_ctx 38000
+```
+
+## 
+
+```ps1
+ollama create research-phi3 -f modelfile
+```
+
+```bash
+PS L:\repos\Automated-AI-Web-Researcher-Ollama> ollama list
+NAME                                          ID              SIZE     MODIFIED
+research-phi3:latest                          e70e1b981bc3    14 GB    40 seconds ago    
+taozhiyuai/phi-3-medium-instruct:128k_q8_0    8235c8c9af63    14 GB    40 seconds ago    
+PS L:\repos\Automated-AI-Web-Researcher-Ollama>
+```
+
+## Go to the `llm_config.py` file which should have an ollama section that looks like this:
+
+```sh
+LLM_CONFIG_OLLAMA = {
+    "llm_type": "ollama",
+    "base_url": "http://localhost:11434",  # default Ollama server URL
+    "model_name": "research-phi3",  # Replace with your Ollama model name. Default: "custom-phi3-32k-Q4_K_M"
+    "temperature": 0.7,
+    "top_p": 0.9,
+    "n_ctx": 55000,
+    "stop": ["User:", "\n\n"]
+```
